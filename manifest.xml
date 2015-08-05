@@ -1,0 +1,18 @@
+<package>
+  <description brief="cloud_to_map">
+
+     cloud_to_map
+
+  </description>
+  <author>ros</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/cloud_to_map</url>
+  <depend package="pcl_conversions"/>
+  <depend package="pcl_ros"/>
+  <depend package="roscpp"/>
+  <depend package="sensor_msgs"/>
+
+</package>
+
+
