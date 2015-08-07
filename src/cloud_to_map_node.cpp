@@ -2,11 +2,8 @@
 #include <fstream>
 #include <stdint.h>
 #include <math.h>
-
-//ROS specific includes
 #include <ros/ros.h>
 #include <pcl_ros/point_cloud.h>
-// PCL specific includes
 #include <nav_msgs/OccupancyGrid.h>
 #include <pcl_conversions/pcl_conversions.h>
 #include <pcl/point_cloud.h>
@@ -17,36 +14,39 @@
 #include <pcl/features/normal_3d.h>
 #include <pcl/console/parse.h>
 
+/* Define the two point cloud types used in this code */
 typedef pcl::PointCloud<pcl::PointXYZRGB> PointCloud;
+typedef pcl::PointCloud<pcl::Normal> NormalCloud;
 
-PointCloud::ConstPtr mostRecentPC;
+/* Create Point Clouds */
+PointCloud::ConstPtr newPC;
 PointCloud::ConstPtr currentPC;
-bool mostRecent = false;
+bool newPointCloud = false;
 
 // ------------------------------------------------------
 // -----Update current PointCloud if msg is received-----
 // ------------------------------------------------------
-void callback(const PointCloud::ConstPtr& msg){
-	mostRecentPC = msg;
-	mostRecent = true;
+void callback(const PointCloud::ConstPtr& msg) {
+  newPC = msg;
+  newPointCloud = true;
 }
 
 // ----------------------------------------------------------------
 // -----Calculate surface normals with a search radius of 0.05-----
 // ----------------------------------------------------------------
-void calcSurfaceNormals(PointCloud::ConstPtr& cloud, pcl::PointCloud<pcl::Normal>::Ptr normals){
+void calcSurfaceNormals(PointCloud::ConstPtr& cloud, pcl::PointCloud<pcl::Normal>::Ptr normals) {
   pcl::NormalEstimation<pcl::PointXYZRGB, pcl::Normal> ne;
-  ne.setInputCloud (cloud);
-  pcl::search::KdTree<pcl::PointXYZRGB>::Ptr tree (new pcl::search::KdTree<pcl::PointXYZRGB> ());
-  ne.setSearchMethod (tree);
-  ne.setRadiusSearch (0.05);
+  ne.setInputCloud(cloud);
+  pcl::search::KdTree<pcl::PointXYZRGB>::Ptr tree(new pcl::search::KdTree<pcl::PointXYZRGB>());
+  ne.setSearchMethod(tree);
+  ne.setRadiusSearch(0.05);
   ne.compute(*normals);
 }
 
 // ---------------------------------------
 // -----Initialize Occupancy Grid Msg-----
 // ---------------------------------------
-void initGrid(nav_msgs::OccupancyGridPtr grid){
+void initGrid(nav_msgs::OccupancyGridPtr grid) {
   grid->header.seq = 1;
   grid->header.frame_id = "map";
   grid->info.origin.position.z = 0;
@@ -59,7 +59,8 @@ void initGrid(nav_msgs::OccupancyGridPtr grid){
 // -----------------------------------
 // -----Update Occupancy Grid Msg-----
 // -----------------------------------
-void updateGrid(nav_msgs::OccupancyGridPtr grid, float cellRes, int xCells, int yCells, float originX, float originY, std::vector<signed char> *ocGrid){
+void updateGrid(nav_msgs::OccupancyGridPtr grid, float cellRes, int xCells, int yCells,
+    float originX, float originY, std::vector<signed char> *ocGrid) {
   grid->header.seq++;
   grid->header.stamp.sec = ros::Time::now().sec;
   grid->header.stamp.nsec = ros::Time::now().nsec;
@@ -75,121 +76,131 @@ void updateGrid(nav_msgs::OccupancyGridPtr grid, float cellRes, int xCells, int 
 // ------------------------------------------
 // -----Calculate size of Occupancy Grid-----
 // ------------------------------------------
-void calcSize(float *xMax, float *yMax, float *xMin, float *yMin){
-	for(size_t i = 0; i < currentPC->size(); i++){
-		float x = currentPC->points[i].x;
-		float y = currentPC->points[i].y;
-		if(*xMax < x){
-			*xMax = x;
-		} if(*xMin > x) {
-			*xMin = x;
-		} if(*yMax < y){
-			*yMax = y;
-		} if(*yMin > y){
-			*yMin = y;
-		}
-	}
+void calcSize(float *xMax, float *yMax, float *xMin, float *yMin) {
+  for (size_t i = 0; i < currentPC->size(); i++) {
+    float x = currentPC->points[i].x;
+    float y = currentPC->points[i].y;
+    if (*xMax < x) {
+      *xMax = x;
+    }
+    if (*xMin > x) {
+      *xMin = x;
+    }
+    if (*yMax < y) {
+      *yMax = y;
+    }
+    if (*yMin > y) {
+      *yMin = y;
+    }
+  }
 }
 
+// ---------------------------------------
+// -----Populate map with cost values-----
+// ---------------------------------------
+void populateMap(NormalCloud::Ptr cloud_normals, std::vector<int> &map, float xMin, float yMin,
+    float cellResolution, int xCells, int yCells) {
+  float deviation = 1.2; //TODO parameterize
 
-int main (int argc, char** argv) {
-  // Initialize ROS
-  ros::init (argc, argv, "cloud_to_map_node");
+  for (size_t i = 0; i < currentPC->size(); i++) {
+    float x = currentPC->points[i].x;
+    float y = currentPC->points[i].y;
+    double z = cloud_normals->points[i].normal_z;
+
+    float phi = acos(fabs(z));
+    int xCell, yCell;
+
+    if (z == z) { //TODO Get rid of nan and implement cutoff height
+      xCell = (int) ((x - xMin) / cellResolution);
+      yCell = (int) ((y - yMin) / cellResolution);
+
+      if (phi > deviation) {
+        map[yCell * xCells + xCell]++;
+      } else {
+        map[yCell * xCells + xCell]--;
+      }
+    }
+  }
+}
+
+// ---------------------------------
+// -----Generate Occupancy Grid-----
+// ---------------------------------
+void genOccupancyGrid(std::vector<signed char> &ocGrid, std::vector<int> &countGrid, int size){
+  for (int i = 0; i < size; i++) {
+    if (countGrid[i] < 0) {
+      ocGrid[i] = 0;
+    } else if (countGrid[i] > 0) {
+      ocGrid[i] = 100;
+    } else if (countGrid[i] == 0) {
+      ocGrid[i] = 0; // TODO Should be -1
+    }
+  }
+}
+
+// --------------
+// -----Main-----
+// --------------
+int main(int argc, char** argv) {
+  /* Initialize ROS */
+  ros::init(argc, argv, "cloud_to_map_node");
   ros::NodeHandle nh;
   ros::Subscriber sub = nh.subscribe<PointCloud>("cloud_pcd", 1, callback);
-	ros::Publisher pub = nh.advertise<nav_msgs::OccupancyGrid> ("grid", 1);
-	//Define loop Rate in parameter
-  ros::Rate loop_rate(10);
-  nav_msgs::OccupancyGridPtr grid (new nav_msgs::OccupancyGrid);
+  ros::Publisher pub = nh.advertise<nav_msgs::OccupancyGrid>("grid", 1);
+  ros::Rate loop_rate(10); // TODO create parameter
+
+  /* Initialize Grid */
+  nav_msgs::OccupancyGridPtr grid(new nav_msgs::OccupancyGrid);
   initGrid(grid);
 
-	while(ros::ok()){
-		ros::spinOnce();
-		if(mostRecent == NULL){
-			std::cout << "Waiting for PointCloud..." << "\n";
-	    loop_rate.sleep();
-		} else if(mostRecent == false){
-			loop_rate.sleep();
-			std::cout << "Waiting for PointCloud..." << "\n";
-		} else {
-		  // Record start time
-		  uint32_t sec = ros::Time::now().sec;
-		  uint32_t nsec = ros::Time::now().nsec;
+  while (ros::ok()) {
+    ros::spinOnce();
+    if (newPointCloud == false) {
+      std::cout << "Waiting for PointCloud..." << "\n";
+      loop_rate.sleep();
+    } else {
+      /* Record start time */
+      uint32_t sec = ros::Time::now().sec;
+      uint32_t nsec = ros::Time::now().nsec;
 
-			currentPC = mostRecentPC;
-			mostRecent = false;
+      /* Update current pointcloud */
+      currentPC = newPC;
+      newPointCloud = false;
 
-			//Calculate Surface Normals
-		  pcl::PointCloud<pcl::Normal>::Ptr cloud_normals (new pcl::PointCloud<pcl::Normal>);
-		  calcSurfaceNormals(currentPC, cloud_normals);
+      /* Calculate Surface Normals */
+      NormalCloud::Ptr cloud_normals(new NormalCloud);
+      calcSurfaceNormals(currentPC, cloud_normals);
 
-		  // Figure out size of matrix needed to store data.
-		  float xMax = 0, yMax = 0, xMin = 0, yMin = 0;
-		  calcSize(&xMax, &yMax, &xMin, &yMin);
+      /* Figure out size of matrix needed to store data. */
+      float xMax = 0, yMax = 0, xMin = 0, yMin = 0;
+      calcSize(&xMax, &yMax, &xMin, &yMin);
 
-		  std::cout << "Matrix dimension: xMax: "<< xMax << ", yMax: " << yMax << ", xMin: " << xMin << ", yMin: " << yMin << "\n";
-		  //Determine resolution of costmap (m/cell).
-		  float cellResolution = .02;
-		  float xSize = xMax - xMin;
-		  float ySize = yMax - yMin;
-		  int xCells = (int)(xSize / cellResolution);
-		  int yCells = (int)(ySize / cellResolution);
-		  std::cout << "Resolution info: xSize: " << xSize << ", ySize: " << ySize << ", xCells: " << xCells << ", yCells: " << yCells << "\n";
-		  //Record Origin
-		  float originX = xMin;
-		  float originY = yMin;
-		  float originZ = 0.0;
-		  std::vector<int> map(yCells*xCells);
-		  //Cut off height (m)
-		  //Allowable deviation from the normal of the ground plane (radians). pi /4
-		  float deviation = 1.2;
-		  // Loop through cloud populating map with cost values
-		  size_t x = currentPC->size();
-		  for(size_t i = 0; i < x; i++){
-		  	float x = currentPC->points[i].x;
-				float y = currentPC->points[i].y;
-				double z = cloud_normals->points[i].normal_z;
+      /* Determine resolution of grid (m/cell) */
+      float cellResolution = .02; //TODO Parameterize
+      int xCells = (int) ((xMax - xMin) / cellResolution);
+      int yCells = (int) ((yMax - yMin) / cellResolution);
 
-				//Compute phi
-				float phi = acos(fabs(z));
-				//Check cut off height
-				int xCell, yCell;
-				if(z == z){// Get rid of nan
-					//Calculate cell
-					xCell = (int)((x - xMin)/cellResolution);
-					yCell = (int)((y - yMin)/cellResolution);
+      /* Populate Map */
+      std::vector<int> countGrid(yCells * xCells);
+      populateMap(cloud_normals, countGrid, xMin, yMin, cellResolution, xCells, yCells);
 
-					//Check deviation
-					if(phi > deviation){
-						map[yCell*xCells+xCell]++;
-					} else {
-						map[yCell*xCells+xCell]--;
-					}
-				}
-		  }
+      /* Generate OccupancyGrid Data Vector */
+      std::vector<signed char> ocGrid(yCells * xCells);
+      genOccupancyGrid(ocGrid, countGrid, xCells*yCells);
 
-		  //Generate OccupancyGrid Vector that matches ROS standard.
-		  std::vector<signed char> ocGrid(yCells*xCells);
-		  for(int i=0; i<yCells*xCells; i++){
-				if(map[i] < 0){
-					ocGrid[i] = 0;
-				} else if(map[i] > 0){
-					ocGrid[i] = 100;
-				} else if (map[i] == 0){
-					ocGrid[i] = 0; //Should be -1
-				}
-		  }
+      /* Update OccupancyGrid Object */
+      updateGrid(grid, cellResolution, xCells, yCells, xMin, yMin, &ocGrid);
 
-		  //Update OccupancyGrid
-		  updateGrid(grid, cellResolution, xCells, yCells, originX, originY, &ocGrid);
+      /* Record end time */
+      uint32_t esec = ros::Time::now().sec;
+      uint32_t ensec = ros::Time::now().nsec;
+      std::cout << "Seconds: " << esec - sec << "\nNSeconds: " << ensec - nsec << "\n";
 
+      /* Publish Occupancy Grid */
+      pub.publish(grid);
 
-		  //Record end time
-		  uint32_t esec =ros::Time::now().sec;
-		  uint32_t ensec = ros::Time::now().nsec;
-
-		  std::cout << "Seconds: " << esec - sec << "\nNSeconds: " << ensec - nsec << "\n";
-	    pub.publish(grid);
-		}
-	}
+      /* Wait */
+      loop_rate.sleep();
+    }
+  }
 }

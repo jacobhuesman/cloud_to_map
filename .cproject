@@ -13,360 +13,6 @@
 				<project-mappings/>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
-			<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets">
-				<buildTargets>
-					<target name=": ROSBUILD_genmsg_cpp" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>ROSBUILD_genmsg_cpp</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name=": ROSBUILD_genmsg_lisp" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>ROSBUILD_genmsg_lisp</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name=": ROSBUILD_gensrv_cpp" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>ROSBUILD_gensrv_cpp</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name=": ROSBUILD_gensrv_lisp" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>ROSBUILD_gensrv_lisp</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name=": _catkin_empty_exported_target" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>_catkin_empty_exported_target</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name=": clean_test_results" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>clean_test_results</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name="[exe] cloud_to_map_node" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>cloud_to_map_node</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name="[exe] cloud_to_map_node/fast" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>cloud_to_map_node/fast</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name="Build" path="[Targets]/[exe] cloud_to_map_node" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-C "/home/ros/ros_ws/cloud_to_map" -j8</buildArguments>
-						<buildTarget>cloud_to_map_node</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name="Clean" path="[Targets]/[exe] cloud_to_map_node" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/cmake</buildCommand>
-						<buildArguments>-E chdir "/home/ros/ros_ws/cloud_to_map" "/usr/bin/cmake" -P "CMakeFiles/cloud_to_map_node.dir/cmake_clean.cmake"</buildArguments>
-						<buildTarget/>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name=": download_extra_data" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>download_extra_data</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name=": doxygen" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>doxygen</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name=": install" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>install</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name=": install/local" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>install/local</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name=": install/strip" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>install/strip</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name=": list_install_components" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>list_install_components</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name=": rebuild_cache" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>rebuild_cache</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name=": rosbuild_clean-test-results" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>rosbuild_clean-test-results</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name=": rosbuild_precompile" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>rosbuild_precompile</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name=": rosbuild_premsgsrvgen" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>rosbuild_premsgsrvgen</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name=": rospack_genmsg" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>rospack_genmsg</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name=": rospack_genmsg_libexe" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>rospack_genmsg_libexe</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name=": rospack_gensrv" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>rospack_gensrv</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name=": run_tests" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>run_tests</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name=": test" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>test</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name=": test-future" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>test-future</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name=": test-results" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>test-results</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name=": test-results-run" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>test-results-run</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name=": tests" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>tests</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name=": all" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>all</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name=": clean" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>clean</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name="[obj] src/cloud_to_map_node.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>src/cloud_to_map_node.cpp.o</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name="[pre] src/cloud_to_map_node.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>src/cloud_to_map_node.cpp.i</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name="[to asm] src/cloud_to_map_node.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>src/cloud_to_map_node.cpp.s</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name="[lib] gtest" path="gtest" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>gtest</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name="[lib] gtest/fast" path="gtest" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>gtest/fast</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name="Build" path="[Targets]/[lib] gtest" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-C "/home/ros/ros_ws/cloud_to_map" -j8</buildArguments>
-						<buildTarget>gtest</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name="Clean" path="[Targets]/[lib] gtest" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/cmake</buildCommand>
-						<buildArguments>-E chdir "/home/ros/ros_ws/cloud_to_map/gtest" "/usr/bin/cmake" -P "CMakeFiles/gtest.dir/cmake_clean.cmake"</buildArguments>
-						<buildTarget/>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name="[lib] gtest_main" path="gtest" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>gtest_main</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name="[lib] gtest_main/fast" path="gtest" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>gtest_main/fast</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name="Build" path="[Targets]/[lib] gtest_main" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-C "/home/ros/ros_ws/cloud_to_map" -j8</buildArguments>
-						<buildTarget>gtest_main</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name="Clean" path="[Targets]/[lib] gtest_main" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/cmake</buildCommand>
-						<buildArguments>-E chdir "/home/ros/ros_ws/cloud_to_map/gtest" "/usr/bin/cmake" -P "CMakeFiles/gtest_main.dir/cmake_clean.cmake"</buildArguments>
-						<buildTarget/>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name=": all" path="gtest" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>all</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name=": clean" path="gtest" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>clean</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name="[obj] src/gtest-all.cc.o" path="gtest" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>src/gtest-all.cc.o</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name="[pre] src/gtest-all.cc.i" path="gtest" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>src/gtest-all.cc.i</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name="[to asm] src/gtest-all.cc.s" path="gtest" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>src/gtest-all.cc.s</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name="[obj] src/gtest_main.cc.o" path="gtest" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>src/gtest_main.cc.o</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name="[pre] src/gtest_main.cc.i" path="gtest" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>src/gtest_main.cc.i</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-					<target name="[to asm] src/gtest_main.cc.s" path="gtest" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-						<buildCommand>/usr/bin/make</buildCommand>
-						<buildArguments>-j8</buildArguments>
-						<buildTarget>src/gtest_main.cc.s</buildTarget>
-						<stopOnError>true</stopOnError>
-						<useDefaultCommand>false</useDefaultCommand>
-					</target>
-				</buildTargets>
-			</storageModule>
 		</cconfiguration>
 	</storageModule>
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
@@ -663,4 +309,360 @@
 		<pathentry include="/usr/include/c++/4.8/backward" kind="inc" path="" system="true"/>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
+	<storageModule moduleId="refreshScope"/>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
+	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets">
+		<buildTargets>
+			<target name=": ROSBUILD_genmsg_cpp" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>ROSBUILD_genmsg_cpp</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name=": ROSBUILD_genmsg_lisp" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>ROSBUILD_genmsg_lisp</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name=": ROSBUILD_gensrv_cpp" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>ROSBUILD_gensrv_cpp</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name=": ROSBUILD_gensrv_lisp" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>ROSBUILD_gensrv_lisp</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name=": _catkin_empty_exported_target" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>_catkin_empty_exported_target</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name=": clean_test_results" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>clean_test_results</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name="[exe] cloud_to_map_node" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>cloud_to_map_node</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name="[exe] cloud_to_map_node/fast" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>cloud_to_map_node/fast</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name="Build" path="[Targets]/[exe] cloud_to_map_node" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-C "/home/ros/ros_ws/cloud_to_map" -j8</buildArguments>
+				<buildTarget>cloud_to_map_node</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name="Clean" path="[Targets]/[exe] cloud_to_map_node" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/cmake</buildCommand>
+				<buildArguments>-E chdir "/home/ros/ros_ws/cloud_to_map" "/usr/bin/cmake" -P "CMakeFiles/cloud_to_map_node.dir/cmake_clean.cmake"</buildArguments>
+				<buildTarget/>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name=": download_extra_data" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>download_extra_data</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name=": doxygen" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>doxygen</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name=": install" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>install</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name=": install/local" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>install/local</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name=": install/strip" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>install/strip</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name=": list_install_components" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>list_install_components</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name=": rebuild_cache" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>rebuild_cache</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name=": rosbuild_clean-test-results" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>rosbuild_clean-test-results</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name=": rosbuild_precompile" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>rosbuild_precompile</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name=": rosbuild_premsgsrvgen" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>rosbuild_premsgsrvgen</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name=": rospack_genmsg" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>rospack_genmsg</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name=": rospack_genmsg_libexe" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>rospack_genmsg_libexe</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name=": rospack_gensrv" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>rospack_gensrv</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name=": run_tests" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>run_tests</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name=": test" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>test</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name=": test-future" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>test-future</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name=": test-results" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>test-results</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name=": test-results-run" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>test-results-run</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name=": tests" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>tests</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name=": all" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>all</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name=": clean" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>clean</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name="[obj] src/cloud_to_map_node.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>src/cloud_to_map_node.cpp.o</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name="[pre] src/cloud_to_map_node.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>src/cloud_to_map_node.cpp.i</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name="[to asm] src/cloud_to_map_node.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>src/cloud_to_map_node.cpp.s</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name="[lib] gtest" path="gtest" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>gtest</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name="[lib] gtest/fast" path="gtest" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>gtest/fast</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name="Build" path="[Targets]/[lib] gtest" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-C "/home/ros/ros_ws/cloud_to_map" -j8</buildArguments>
+				<buildTarget>gtest</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name="Clean" path="[Targets]/[lib] gtest" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/cmake</buildCommand>
+				<buildArguments>-E chdir "/home/ros/ros_ws/cloud_to_map/gtest" "/usr/bin/cmake" -P "CMakeFiles/gtest.dir/cmake_clean.cmake"</buildArguments>
+				<buildTarget/>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name="[lib] gtest_main" path="gtest" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>gtest_main</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name="[lib] gtest_main/fast" path="gtest" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>gtest_main/fast</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name="Build" path="[Targets]/[lib] gtest_main" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-C "/home/ros/ros_ws/cloud_to_map" -j8</buildArguments>
+				<buildTarget>gtest_main</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name="Clean" path="[Targets]/[lib] gtest_main" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/cmake</buildCommand>
+				<buildArguments>-E chdir "/home/ros/ros_ws/cloud_to_map/gtest" "/usr/bin/cmake" -P "CMakeFiles/gtest_main.dir/cmake_clean.cmake"</buildArguments>
+				<buildTarget/>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name=": all" path="gtest" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>all</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name=": clean" path="gtest" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>clean</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name="[obj] src/gtest-all.cc.o" path="gtest" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>src/gtest-all.cc.o</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name="[pre] src/gtest-all.cc.i" path="gtest" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>src/gtest-all.cc.i</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name="[to asm] src/gtest-all.cc.s" path="gtest" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>src/gtest-all.cc.s</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name="[obj] src/gtest_main.cc.o" path="gtest" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>src/gtest_main.cc.o</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name="[pre] src/gtest_main.cc.i" path="gtest" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>src/gtest_main.cc.i</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+			<target name="[to asm] src/gtest_main.cc.s" path="gtest" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>src/gtest_main.cc.s</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+			</target>
+		</buildTargets>
+	</storageModule>
 </cproject>
