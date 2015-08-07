@@ -23,6 +23,9 @@ PointCloud::ConstPtr mostRecentPC;
 PointCloud::ConstPtr currentPC;
 bool mostRecent = false;
 
+// ------------------------------------------------------
+// -----Update current PointCloud if msg is received-----
+// ------------------------------------------------------
 void callback(const PointCloud::ConstPtr& msg){
 	mostRecentPC = msg;
 	mostRecent = true;
@@ -40,6 +43,55 @@ void calcSurfaceNormals(PointCloud::ConstPtr& cloud, pcl::PointCloud<pcl::Normal
   ne.compute(*normals);
 }
 
+// ---------------------------------------
+// -----Initialize Occupancy Grid Msg-----
+// ---------------------------------------
+void initGrid(nav_msgs::OccupancyGridPtr grid){
+  grid->header.seq = 1;
+  grid->header.frame_id = "map";
+  grid->info.origin.position.z = 0;
+  grid->info.origin.orientation.w = 1;
+  grid->info.origin.orientation.x = 0;
+  grid->info.origin.orientation.y = 0;
+  grid->info.origin.orientation.z = 0;
+}
+
+// -----------------------------------
+// -----Update Occupancy Grid Msg-----
+// -----------------------------------
+void updateGrid(nav_msgs::OccupancyGridPtr grid, float cellRes, int xCells, int yCells, float originX, float originY, std::vector<signed char> *ocGrid){
+  grid->header.seq++;
+  grid->header.stamp.sec = ros::Time::now().sec;
+  grid->header.stamp.nsec = ros::Time::now().nsec;
+  grid->info.map_load_time = ros::Time::now();
+  grid->info.resolution = cellRes;
+  grid->info.width = xCells;
+  grid->info.height = yCells;
+  grid->info.origin.position.x = originX;
+  grid->info.origin.position.y = originY;
+  grid->data = *ocGrid;
+}
+
+// ------------------------------------------
+// -----Calculate size of Occupancy Grid-----
+// ------------------------------------------
+void calcSize(float *xMax, float *yMax, float *xMin, float *yMin){
+	for(size_t i = 0; i < currentPC->size(); i++){
+		float x = currentPC->points[i].x;
+		float y = currentPC->points[i].y;
+		if(*xMax < x){
+			*xMax = x;
+		} if(*xMin > x) {
+			*xMin = x;
+		} if(*yMax < y){
+			*yMax = y;
+		} if(*yMin > y){
+			*yMin = y;
+		}
+	}
+}
+
+
 int main (int argc, char** argv) {
   // Initialize ROS
   ros::init (argc, argv, "cloud_to_map_node");
@@ -48,6 +100,8 @@ int main (int argc, char** argv) {
 	ros::Publisher pub = nh.advertise<nav_msgs::OccupancyGrid> ("grid", 1);
 	//Define loop Rate in parameter
   ros::Rate loop_rate(10);
+  nav_msgs::OccupancyGridPtr grid (new nav_msgs::OccupancyGrid);
+  initGrid(grid);
 
 	while(ros::ok()){
 		ros::spinOnce();
@@ -71,19 +125,8 @@ int main (int argc, char** argv) {
 
 		  // Figure out size of matrix needed to store data.
 		  float xMax = 0, yMax = 0, xMin = 0, yMin = 0;
-		  for(size_t i = 0; i < currentPC->size(); i++){
-		  	float x = currentPC->points[i].x;
-		  	float y = currentPC->points[i].y;
-		  	if(xMax < x){
-		  		xMax = x;
-		  	} if(xMin > x) {
-		  		xMin = x;
-		  	} if(yMax < y){
-		  		yMax = y;
-		  	} if(yMin > y){
-		  		yMin = y;
-		  	}
-		  }
+		  calcSize(&xMax, &yMax, &xMin, &yMin);
+
 		  std::cout << "Matrix dimension: xMax: "<< xMax << ", yMax: " << yMax << ", xMin: " << xMin << ", yMin: " << yMin << "\n";
 		  //Determine resolution of costmap (m/cell).
 		  float cellResolution = .02;
@@ -125,8 +168,7 @@ int main (int argc, char** argv) {
 				}
 		  }
 
-		  //Generate OccupancyGrid that matches ROS standard.
-
+		  //Generate OccupancyGrid Vector that matches ROS standard.
 		  std::vector<signed char> ocGrid(yCells*xCells);
 		  for(int i=0; i<yCells*xCells; i++){
 				if(map[i] < 0){
@@ -138,25 +180,9 @@ int main (int argc, char** argv) {
 				}
 		  }
 
-		  //Create OccupancyGrid
-		  nav_msgs::OccupancyGridPtr grid (new nav_msgs::OccupancyGrid);
-		  grid->header.seq = 1;
-		  grid->header.stamp.sec = ros::Time::now().sec;
-		  grid->header.stamp.nsec = ros::Time::now().nsec;
-		  grid->header.frame_id = "map";
-		  grid->info.map_load_time = ros::Time::now();
-		  grid->info.resolution = cellResolution;
-		  grid->info.width = xCells;
-		  grid->info.height = yCells;
-		  grid->info.origin.position.x = originX;
-		  grid->info.origin.position.y = originY;
-		  grid->info.origin.position.z = originZ;
-		  grid->info.origin.orientation.w = 1;
-		  grid->info.origin.orientation.x = 0;
-		  grid->info.origin.orientation.y = 0;
-		  grid->info.origin.orientation.z = 0;
-		  //Data has to be stored in a vector
-		  grid->data = ocGrid;
+		  //Update OccupancyGrid
+		  updateGrid(grid, cellResolution, xCells, yCells, originX, originY, &ocGrid);
+
 
 		  //Record end time
 		  uint32_t esec =ros::Time::now().sec;
