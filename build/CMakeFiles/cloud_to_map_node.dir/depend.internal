@@ -15,6 +15,7 @@ CMakeFiles/cloud_to_map_node.dir/src/cloud_to_map_node.cpp.o
  /opt/ros/indigo/include/pcl_msgs/PointIndices.h
  /opt/ros/indigo/include/pcl_msgs/PolygonMesh.h
  /opt/ros/indigo/include/pcl_msgs/Vertices.h
+ /opt/ros/indigo/include/pcl_ros/point_cloud.h
  /opt/ros/indigo/include/ros/advertise_options.h
  /opt/ros/indigo/include/ros/advertise_service_options.h
  /opt/ros/indigo/include/ros/assert.h

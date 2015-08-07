@@ -13,7 +13,11 @@ fstream
 -
 stdint.h
 -
+math.h
+-
 ros/ros.h
+-
+pcl_ros/point_cloud.h
 -
 nav_msgs/OccupancyGrid.h
 -
@@ -32,8 +36,6 @@ pcl/point_types.h
 pcl/features/normal_3d.h
 -
 pcl/console/parse.h
--
-math.h
 -
 
 /opt/ros/indigo/include/XmlRpcDecl.h
@@ -260,6 +262,26 @@ ros/serialization.h
 ros/builtin_message_traits.h
 -
 ros/message_operations.h
+-
+
+/opt/ros/indigo/include/pcl_ros/point_cloud.h
+ros/ros.h
+-
+pcl/point_cloud.h
+-
+pcl/point_traits.h
+-
+pcl/for_each_type.h
+-
+pcl/conversions.h
+-
+pcl_conversions/pcl_conversions.h
+-
+sensor_msgs/PointCloud2.h
+-
+boost/mpl/size.hpp
+-
+boost/ref.hpp
 -
 
 /opt/ros/indigo/include/ros/advertise_options.h
