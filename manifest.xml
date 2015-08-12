@@ -12,6 +12,8 @@
   <depend package="pcl_ros"/>
   <depend package="roscpp"/>
   <depend package="sensor_msgs"/>
+  <depend package="rospy"/>
+  <depend package="dynamic_reconfigure"/>
 
 </package>
 

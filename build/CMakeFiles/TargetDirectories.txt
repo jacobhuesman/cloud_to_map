@@ -1,3 +1,4 @@
+/home/ros/ros_ws/cloud_to_map/build/CMakeFiles/ROSBUILD_gencfg_cpp.dir
 /home/ros/ros_ws/cloud_to_map/build/CMakeFiles/ROSBUILD_genmsg_cpp.dir
 /home/ros/ros_ws/cloud_to_map/build/CMakeFiles/ROSBUILD_genmsg_lisp.dir
 /home/ros/ros_ws/cloud_to_map/build/CMakeFiles/ROSBUILD_gensrv_cpp.dir
@@ -12,6 +13,8 @@
 /home/ros/ros_ws/cloud_to_map/build/CMakeFiles/rosbuild_clean-test-results.dir
 /home/ros/ros_ws/cloud_to_map/build/CMakeFiles/rosbuild_precompile.dir
 /home/ros/ros_ws/cloud_to_map/build/CMakeFiles/rosbuild_premsgsrvgen.dir
+/home/ros/ros_ws/cloud_to_map/build/CMakeFiles/rospack_gencfg.dir
+/home/ros/ros_ws/cloud_to_map/build/CMakeFiles/rospack_gencfg_real.dir
 /home/ros/ros_ws/cloud_to_map/build/CMakeFiles/rospack_genmsg.dir
 /home/ros/ros_ws/cloud_to_map/build/CMakeFiles/rospack_genmsg_libexe.dir
 /home/ros/ros_ws/cloud_to_map/build/CMakeFiles/rospack_gensrv.dir

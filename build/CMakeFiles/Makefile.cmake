@@ -60,6 +60,7 @@ SET(CMAKE_MAKEFILE_DEPENDS
   "/opt/ros/indigo/share/catkin/cmake/tools/doxygen.cmake"
   "/opt/ros/indigo/share/catkin/cmake/tools/libraries.cmake"
   "/opt/ros/indigo/share/catkin/cmake/tools/rt.cmake"
+  "/opt/ros/indigo/share/dynamic_reconfigure/cmake/cfgbuild.cmake"
   "/opt/ros/indigo/share/gencpp/cmake/gencpp-extras.cmake"
   "/opt/ros/indigo/share/gencpp/cmake/gencppConfig-version.cmake"
   "/opt/ros/indigo/share/gencpp/cmake/gencppConfig.cmake"
@@ -142,6 +143,7 @@ SET(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 SET(CMAKE_DEPEND_INFO_FILES
+  "CMakeFiles/ROSBUILD_gencfg_cpp.dir/DependInfo.cmake"
   "CMakeFiles/ROSBUILD_genmsg_cpp.dir/DependInfo.cmake"
   "CMakeFiles/ROSBUILD_genmsg_lisp.dir/DependInfo.cmake"
   "CMakeFiles/ROSBUILD_gensrv_cpp.dir/DependInfo.cmake"
@@ -154,6 +156,8 @@ SET(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/rosbuild_clean-test-results.dir/DependInfo.cmake"
   "CMakeFiles/rosbuild_precompile.dir/DependInfo.cmake"
   "CMakeFiles/rosbuild_premsgsrvgen.dir/DependInfo.cmake"
+  "CMakeFiles/rospack_gencfg.dir/DependInfo.cmake"
+  "CMakeFiles/rospack_gencfg_real.dir/DependInfo.cmake"
   "CMakeFiles/rospack_genmsg.dir/DependInfo.cmake"
   "CMakeFiles/rospack_genmsg_libexe.dir/DependInfo.cmake"
   "CMakeFiles/rospack_gensrv.dir/DependInfo.cmake"

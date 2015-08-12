@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/jake/ros_ws/cloud_to_map/devel/setup.sh

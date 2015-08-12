@@ -31,7 +31,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.build.location</key>
-					<value>/home/ros/ros_ws/cloud_to_map</value>
+					<value>/home/jake/ros_ws/cloud_to_map</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.build.target.auto</key>
@@ -51,7 +51,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.buildLocation</key>
-					<value>/home/ros/ros_ws/cloud_to_map</value>
+					<value>/home/jake/ros_ws/cloud_to_map</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.cleanBuildTarget</key>
@@ -79,7 +79,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.environment</key>
-					<value>PATH=/opt/ros/indigo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games|CMAKE_PREFIX_PATH=/opt/ros/indigo|PKG_CONFIG_PATH=/opt/ros/indigo/lib/x86_64-linux-gnu/pkgconfig:/opt/ros/indigo/lib/pkgconfig|PYTHONPATH=/opt/ros/indigo/lib/python2.7/dist-packages|ROS_PACKAGE_PATH=/home/ros/ros_ws/cloud_to_map:/opt/ros/indigo/share:/opt/ros/indigo/stacks|LD_LIBRARY_PATH=/opt/ros/indigo/lib/x86_64-linux-gnu:/opt/ros/indigo/lib:/opt/ros/indigo/lib/python2.7/dist-packages:/opt/ros/indigo/lib/python2.7/dist-packages:/opt/ros/indigo/lib/python2.7/dist-packages:/opt/ros/indigo/lib/python2.7/dist-packages|ROS_MASTER_URI=http://localhost:11311|ROS_ROOT=/opt/ros/indigo/share/ros|VERBOSE=1|</value>
+					<value>PATH=/opt/ros/indigo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games|CMAKE_PREFIX_PATH=/opt/ros/indigo|PKG_CONFIG_PATH=/opt/ros/indigo/lib/x86_64-linux-gnu/pkgconfig:/home/jake/catkin_ws/devel/lib/pkgconfig:/home/ros/catkin_ws/devel/lib/pkgconfig:/opt/ros/indigo/lib/pkgconfig|PYTHONPATH=/opt/ros/indigo/lib/python2.7/dist-packages|ROS_PACKAGE_PATH=/home/jake/ros_ws/cloud_to_map:/opt/ros/indigo/share:/opt/ros/indigo/stacks|LD_LIBRARY_PATH=/opt/ros/indigo/lib/x86_64-linux-gnu:/home/jake/catkin_ws/devel/lib:/home/ros/catkin_ws/devel/lib:/opt/ros/indigo/lib|ROS_ROOT=/opt/ros/indigo/share/ros|VERBOSE=1|</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.fullBuildTarget</key>
@@ -216,7 +216,7 @@
 		<link>
 			<name>[Targets]/[exe] cloud_to_map_node/Source Files/cloud_to_map_node.cpp</name>
 			<type>1</type>
-			<location>/home/ros/ros_ws/cloud_to_map/src/cloud_to_map_node.cpp</location>
+			<location>/home/jake/ros_ws/cloud_to_map/src/cloud_to_map_node.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] gtest/Source Files/gtest-all.cc</name>

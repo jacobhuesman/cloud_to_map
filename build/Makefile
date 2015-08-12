@@ -140,6 +140,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named ROSBUILD_gencfg_cpp
+
+# Build rule for target.
+ROSBUILD_gencfg_cpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ROSBUILD_gencfg_cpp
+.PHONY : ROSBUILD_gencfg_cpp
+
+# fast build rule for target.
+ROSBUILD_gencfg_cpp/fast:
+	$(MAKE) -f CMakeFiles/ROSBUILD_gencfg_cpp.dir/build.make CMakeFiles/ROSBUILD_gencfg_cpp.dir/build
+.PHONY : ROSBUILD_gencfg_cpp/fast
+
+#=============================================================================
 # Target rules for targets named ROSBUILD_genmsg_cpp
 
 # Build rule for target.
@@ -294,6 +307,32 @@ rosbuild_premsgsrvgen: cmake_check_build_system
 rosbuild_premsgsrvgen/fast:
 	$(MAKE) -f CMakeFiles/rosbuild_premsgsrvgen.dir/build.make CMakeFiles/rosbuild_premsgsrvgen.dir/build
 .PHONY : rosbuild_premsgsrvgen/fast
+
+#=============================================================================
+# Target rules for targets named rospack_gencfg
+
+# Build rule for target.
+rospack_gencfg: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 rospack_gencfg
+.PHONY : rospack_gencfg
+
+# fast build rule for target.
+rospack_gencfg/fast:
+	$(MAKE) -f CMakeFiles/rospack_gencfg.dir/build.make CMakeFiles/rospack_gencfg.dir/build
+.PHONY : rospack_gencfg/fast
+
+#=============================================================================
+# Target rules for targets named rospack_gencfg_real
+
+# Build rule for target.
+rospack_gencfg_real: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 rospack_gencfg_real
+.PHONY : rospack_gencfg_real
+
+# fast build rule for target.
+rospack_gencfg_real/fast:
+	$(MAKE) -f CMakeFiles/rospack_gencfg_real.dir/build.make CMakeFiles/rospack_gencfg_real.dir/build
+.PHONY : rospack_gencfg_real/fast
 
 #=============================================================================
 # Target rules for targets named rospack_genmsg
@@ -468,6 +507,7 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... ROSBUILD_gencfg_cpp"
 	@echo "... ROSBUILD_genmsg_cpp"
 	@echo "... ROSBUILD_genmsg_lisp"
 	@echo "... ROSBUILD_gensrv_cpp"
@@ -486,6 +526,8 @@ help:
 	@echo "... rosbuild_clean-test-results"
 	@echo "... rosbuild_precompile"
 	@echo "... rosbuild_premsgsrvgen"
+	@echo "... rospack_gencfg"
+	@echo "... rospack_gencfg_real"
 	@echo "... rospack_genmsg"
 	@echo "... rospack_genmsg_libexe"
 	@echo "... rospack_gensrv"

@@ -2,9 +2,11 @@
 #include <fstream>
 #include <stdint.h>
 #include <math.h>
+
 #include <ros/ros.h>
 #include <pcl_ros/point_cloud.h>
 #include <nav_msgs/OccupancyGrid.h>
+
 #include <pcl_conversions/pcl_conversions.h>
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
@@ -14,21 +16,67 @@
 #include <pcl/features/normal_3d.h>
 #include <pcl/console/parse.h>
 
+#include <dynamic_reconfigure/server.h>
+#include <cloud_to_map/cloud_to_map_nodeConfig.h>
+
 /* Define the two point cloud types used in this code */
 typedef pcl::PointCloud<pcl::PointXYZRGB> PointCloud;
 typedef pcl::PointCloud<pcl::Normal> NormalCloud;
 
-/* Create Point Clouds */
-PointCloud::ConstPtr newPC;
+/* Global */
 PointCloud::ConstPtr currentPC;
 bool newPointCloud = false;
+bool reconfig = false;
+
+// -----------------------------------------------
+// -----Define a structure to hold parameters-----
+// -----------------------------------------------
+struct Param {
+  std::string frame;
+  double searchRadius;
+  double deviation;
+  int buffer;
+  double loopRate;
+  double cellResolution;
+};
+
+// -----------------------------------
+// -----Define default parameters-----
+// -----------------------------------
+Param param;
+boost::mutex mutex;
+void loadDefaults(ros::NodeHandle& nh) {
+  nh.param<std::string>("frame", param.frame, "map");
+  nh.param("search_radius", param.searchRadius, 0.05);
+  nh.param("deviation", param.deviation, 0.78539816339);
+  nh.param("buffer", param.buffer, 5);
+  nh.param("loop_rate", param.loopRate, 10.0);
+  nh.param("cell_resolution", param.cellResolution, 0.02);
+}
 
 // ------------------------------------------------------
 // -----Update current PointCloud if msg is received-----
 // ------------------------------------------------------
 void callback(const PointCloud::ConstPtr& msg) {
-  newPC = msg;
+  boost::unique_lock<boost::mutex>(mutex);
+  currentPC = msg;
   newPointCloud = true;
+}
+
+// ------------------------------------------
+// -----Callback for Dynamic Reconfigure-----
+// ------------------------------------------
+void callbackReconfig(cloud_to_map::cloud_to_map_nodeConfig &config, uint32_t level) {
+  ROS_INFO("Reconfigure Request: %s %f %f %f %f", config.frame.c_str(), config.deviation,
+      config.loop_rate, config.cell_resolution, config.search_radius);
+  boost::unique_lock<boost::mutex>(mutex);
+  param.frame = config.frame.c_str();
+  param.searchRadius = config.search_radius;
+  param.deviation = config.deviation;
+  param.buffer = config.buffer;
+  param.loopRate = config.loop_rate;
+  param.cellResolution = config.cell_resolution;
+  reconfig = true;
 }
 
 // ----------------------------------------------------------------
@@ -39,7 +87,7 @@ void calcSurfaceNormals(PointCloud::ConstPtr& cloud, pcl::PointCloud<pcl::Normal
   ne.setInputCloud(cloud);
   pcl::search::KdTree<pcl::PointXYZRGB>::Ptr tree(new pcl::search::KdTree<pcl::PointXYZRGB>());
   ne.setSearchMethod(tree);
-  ne.setRadiusSearch(0.05);
+  ne.setRadiusSearch(param.searchRadius);
   ne.compute(*normals);
 }
 
@@ -48,7 +96,7 @@ void calcSurfaceNormals(PointCloud::ConstPtr& cloud, pcl::PointCloud<pcl::Normal
 // ---------------------------------------
 void initGrid(nav_msgs::OccupancyGridPtr grid) {
   grid->header.seq = 1;
-  grid->header.frame_id = "map";
+  grid->header.frame_id = param.frame;
   grid->info.origin.position.z = 0;
   grid->info.origin.orientation.w = 1;
   grid->info.origin.orientation.x = 0;
@@ -59,8 +107,8 @@ void initGrid(nav_msgs::OccupancyGridPtr grid) {
 // -----------------------------------
 // -----Update Occupancy Grid Msg-----
 // -----------------------------------
-void updateGrid(nav_msgs::OccupancyGridPtr grid, float cellRes, int xCells, int yCells,
-    float originX, float originY, std::vector<signed char> *ocGrid) {
+void updateGrid(nav_msgs::OccupancyGridPtr grid, double cellRes, int xCells, int yCells,
+    double originX, double originY, std::vector<signed char> *ocGrid) {
   grid->header.seq++;
   grid->header.stamp.sec = ros::Time::now().sec;
   grid->header.stamp.nsec = ros::Time::now().nsec;
@@ -76,10 +124,10 @@ void updateGrid(nav_msgs::OccupancyGridPtr grid, float cellRes, int xCells, int 
 // ------------------------------------------
 // -----Calculate size of Occupancy Grid-----
 // ------------------------------------------
-void calcSize(float *xMax, float *yMax, float *xMin, float *yMin) {
+void calcSize(double *xMax, double *yMax, double *xMin, double *yMin) {
   for (size_t i = 0; i < currentPC->size(); i++) {
-    float x = currentPC->points[i].x;
-    float y = currentPC->points[i].y;
+    double x = currentPC->points[i].x;
+    double y = currentPC->points[i].y;
     if (*xMax < x) {
       *xMax = x;
     }
@@ -98,22 +146,25 @@ void calcSize(float *xMax, float *yMax, float *xMin, float *yMin) {
 // ---------------------------------------
 // -----Populate map with cost values-----
 // ---------------------------------------
-void populateMap(NormalCloud::Ptr cloud_normals, std::vector<int> &map, float xMin, float yMin,
-    float cellResolution, int xCells, int yCells) {
-  float deviation = 1.2; //TODO parameterize
+void populateMap(NormalCloud::Ptr cloud_normals, std::vector<int> &map, double xMin, double yMin,
+    double cellResolution, int xCells, int yCells) {
+  double deviation = param.deviation;
 
   for (size_t i = 0; i < currentPC->size(); i++) {
-    float x = currentPC->points[i].x;
-    float y = currentPC->points[i].y;
+    double x = currentPC->points[i].x;
+    double y = currentPC->points[i].y;
     double z = cloud_normals->points[i].normal_z;
 
-    float phi = acos(fabs(z));
+    double phi = acos(fabs(z));
     int xCell, yCell;
 
-    if (z == z) { //TODO Get rid of nan and implement cutoff height
+    if (z == z) { //TODO implement cutoff height
       xCell = (int) ((x - xMin) / cellResolution);
       yCell = (int) ((y - yMin) / cellResolution);
-
+      if ((yCell * xCells + xCell) > (xCells * yCells)) {
+        std::cout << "x: " << x << ", y: " << y << ", xCell: " << xCell << ", yCell: " << yCell
+            << "\n";
+      }
       if (phi > deviation) {
         map[yCell * xCells + xCell]++;
       } else {
@@ -126,11 +177,12 @@ void populateMap(NormalCloud::Ptr cloud_normals, std::vector<int> &map, float xM
 // ---------------------------------
 // -----Generate Occupancy Grid-----
 // ---------------------------------
-void genOccupancyGrid(std::vector<signed char> &ocGrid, std::vector<int> &countGrid, int size){
+void genOccupancyGrid(std::vector<signed char> &ocGrid, std::vector<int> &countGrid, int size) {
+  int buf = param.buffer;
   for (int i = 0; i < size; i++) {
-    if (countGrid[i] < 0) {
+    if (countGrid[i] < buf) {
       ocGrid[i] = 0;
-    } else if (countGrid[i] > 0) {
+    } else if (countGrid[i] > buf) {
       ocGrid[i] = 100;
     } else if (countGrid[i] == 0) {
       ocGrid[i] = 0; // TODO Should be -1
@@ -145,40 +197,58 @@ int main(int argc, char** argv) {
   /* Initialize ROS */
   ros::init(argc, argv, "cloud_to_map_node");
   ros::NodeHandle nh;
-  ros::Subscriber sub = nh.subscribe<PointCloud>("cloud_pcd", 1, callback);
+  ros::Subscriber sub = nh.subscribe<PointCloud>("/rtabmap/cloud_map", 1, callback);
   ros::Publisher pub = nh.advertise<nav_msgs::OccupancyGrid>("grid", 1);
-  ros::Rate loop_rate(10); // TODO create parameter
+
+  /* Initialize Dynamic Reconfigure */
+  dynamic_reconfigure::Server<cloud_to_map::cloud_to_map_nodeConfig> server;
+  dynamic_reconfigure::Server<cloud_to_map::cloud_to_map_nodeConfig>::CallbackType f;
+  f = boost::bind(&callbackReconfig, _1, _2);
+  server.setCallback(f);
 
   /* Initialize Grid */
   nav_msgs::OccupancyGridPtr grid(new nav_msgs::OccupancyGrid);
   initGrid(grid);
 
+  /* Finish initializing ROS */
+  mutex.lock();
+  ros::Rate loop_rate(param.loopRate);
+  mutex.unlock();
+
+  /* Wait for first point cloud */
+  while(ros::ok() && newPointCloud == false){
+    ros::spinOnce();
+    loop_rate.sleep();
+  }
+
+  /* Begin processing point clouds */
   while (ros::ok()) {
     ros::spinOnce();
-    if (newPointCloud == false) {
-      std::cout << "Waiting for PointCloud..." << "\n";
-      loop_rate.sleep();
-    } else {
+    boost::unique_lock<boost::mutex> lck(mutex);
+    if (newPointCloud || reconfig) {
+      /* Update configuration status */
+      reconfig = false;
+      newPointCloud = false;
+
       /* Record start time */
       uint32_t sec = ros::Time::now().sec;
       uint32_t nsec = ros::Time::now().nsec;
-
-      /* Update current pointcloud */
-      currentPC = newPC;
-      newPointCloud = false;
 
       /* Calculate Surface Normals */
       NormalCloud::Ptr cloud_normals(new NormalCloud);
       calcSurfaceNormals(currentPC, cloud_normals);
 
       /* Figure out size of matrix needed to store data. */
-      float xMax = 0, yMax = 0, xMin = 0, yMin = 0;
+      double xMax = 0, yMax = 0, xMin = 0, yMin = 0;
       calcSize(&xMax, &yMax, &xMin, &yMin);
+      std::cout << "xMax: " << xMax << ", yMax: " << yMax << ", xMin: " << xMin << ", yMin: "
+          << yMin << "\n";
 
       /* Determine resolution of grid (m/cell) */
-      float cellResolution = .02; //TODO Parameterize
-      int xCells = (int) ((xMax - xMin) / cellResolution);
-      int yCells = (int) ((yMax - yMin) / cellResolution);
+      double cellResolution = param.cellResolution;
+      int xCells = ((int) ((xMax - xMin) / cellResolution)) + 1;
+      int yCells = ((int) ((yMax - yMin) / cellResolution)) + 1;
+      std::cout << "xCells: " << xCells << ", yCells: " << yCells << "\n";
 
       /* Populate Map */
       std::vector<int> countGrid(yCells * xCells);
@@ -186,10 +256,13 @@ int main(int argc, char** argv) {
 
       /* Generate OccupancyGrid Data Vector */
       std::vector<signed char> ocGrid(yCells * xCells);
-      genOccupancyGrid(ocGrid, countGrid, xCells*yCells);
+      genOccupancyGrid(ocGrid, countGrid, xCells * yCells);
 
       /* Update OccupancyGrid Object */
       updateGrid(grid, cellResolution, xCells, yCells, xMin, yMin, &ocGrid);
+
+      /* Release lock */
+      lck.unlock();
 
       /* Record end time */
       uint32_t esec = ros::Time::now().sec;
@@ -198,9 +271,7 @@ int main(int argc, char** argv) {
 
       /* Publish Occupancy Grid */
       pub.publish(grid);
-
-      /* Wait */
-      loop_rate.sleep();
     }
+    loop_rate.sleep();
   }
 }

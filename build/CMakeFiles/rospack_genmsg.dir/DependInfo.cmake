@@ -20,6 +20,7 @@ SET(CMAKE_C_TARGET_INCLUDE_PATH
   "/usr/include/pcl-1.7"
   "/usr/include/ni"
   "/usr/include/vtk-5.8"
+  "../cfg/cpp"
   )
 SET(CMAKE_CXX_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})
 SET(CMAKE_Fortran_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})
